@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 0.10
+
+install:
+  - npm install -g grunt-cli
+  - npm install --save-dev
+  - npm install -g spm
+  - spm install --save
+
+script:
+  - grunt qunit

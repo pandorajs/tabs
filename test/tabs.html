@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>tabs</title>
+<link rel="stylesheet" href="../vendor/qunit/qunit.css">
+</head>
+<body>
+    <h1 id="qunit-header">QUnit Test Suite</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup</div>
+    <script src="../vendor/jquery/jquery.js"></script>
+    <script src="../vendor/seajs/sea.js"></script>
+    <script src="../vendor/qunit/qunit.js"></script>
+    <script>
+        QUnit.config.autostart = false;
+        seajs.config({
+            'base': '../sea-modules/',
+            'map': [
+                ['/sea-modules/jquery', '/vendor/jquery/jquery']
+            ],
+            'alias': {
+              '$': 'jquery',
+              'util': 'crossjs/util/0.0.1/util',
+              'class': 'crossjs/class/0.0.3/class'
+            }
+        });
+        seajs.use(['./tabs.js']);
+    </script>
+</body>
+</html>

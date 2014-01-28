@@ -1,0 +1,54 @@
+{
+  "name": "tabs",
+  "version": "0.0.1",
+  "description": "tabs and accordion",
+  "keywords": [ "tabs", "seajs", "modules" ],
+  "homepage": "https://github.com/crossjs/tabs",
+  "bugs": {
+    "url": "https://github.com/crossjs/tabs/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/crossjs/tabs/blob/master/LICENSE-MIT"
+    }
+  ],
+  "author": {
+    "name": "crossjs",
+    "url": "https://github.com/crossjs"
+  },
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/crossjs/tabs.git"
+  },
+  "scripts": {
+    "test": "grunt qunit"
+  },
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-qunit": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-yuidoc": "*",
+    "grunt-cmd-transport": "*",
+    "grunt-cmd-concat": "*",
+    "matchdep": "*"
+  },
+  "family": "crossjs",
+  "spm": {
+    "output": [ "tabs.js" ],
+    "alias": {
+      "$": "$",
+      "util": "crossjs/util/0.0.1/util",
+      "class": "crossjs/class/0.0.3/class"
+    }
+  }
+}
