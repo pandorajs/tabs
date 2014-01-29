@@ -7,10 +7,12 @@
  > seajs module
 
 ##how to require
+
 1. run `spm install crossjs/tabs`
 1. write `require('crossjs/tabs/VERSION.NUMBER/tabs')`
 
 ##how to build
+
 1. checkout
 1. `npm install --save-dev`
 1. `spm install --save`
@@ -18,4 +20,5 @@
 
 ##history
 
+- 0.0.2 - remove dependency `util`
 - 0.0.1 - init

@@ -7,7 +7,6 @@ define(function (require, exports, module) {
 'use strict';
 
 var $ = require('$'),
-  Util = require('util'),
   Class = require('class');
 
 var options = {
@@ -43,6 +42,11 @@ var Tabs = new Class({
 
       if (!self.options.tabs) {
         return;
+      }
+
+      // 事件订阅
+      if ($.isPlainObject(self.options.on)) {
+        self.on(self.options.on);
       }
 
       self.tabs = $(self.options.tabs)

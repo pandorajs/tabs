@@ -1,9 +1,9 @@
-define("crossjs/tabs/0.0.1/tabs-debug", [ "$-debug", "crossjs/util/0.0.1/util-debug", "crossjs/class/0.0.3/class-debug", "crossjs/class/0.0.3/super-debug" ], function(require, exports, module) {
+define("crossjs/tabs/0.0.2/tabs-debug", [ "$-debug", "crossjs/class/0.0.5/class-debug", "crossjs/class/0.0.5/super-debug" ], function(require, exports, module) {
     /**
  * @module Tabs
  */
     "use strict";
-    var $ = require("$-debug"), Util = require("crossjs/util/0.0.1/util-debug"), Class = require("crossjs/class/0.0.3/class-debug");
+    var $ = require("$-debug"), Class = require("crossjs/class/0.0.5/class-debug");
     var options = {
         tabs: ".ui-tab",
         classes: {
@@ -28,6 +28,10 @@ define("crossjs/tabs/0.0.1/tabs-debug", [ "$-debug", "crossjs/util/0.0.1/util-de
             self.parseArgs.apply(self, arguments);
             if (!self.options.tabs) {
                 return;
+            }
+            // 事件订阅
+            if ($.isPlainObject(self.options.on)) {
+                self.on(self.options.on);
             }
             self.tabs = $(self.options.tabs).each(function(i, n) {
                 var tab = $(n), pane;

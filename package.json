@@ -1,6 +1,6 @@
 {
   "name": "tabs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "tabs and accordion",
   "keywords": [ "tabs", "seajs", "modules" ],
   "homepage": "https://github.com/crossjs/tabs",
@@ -47,8 +47,7 @@
     "output": [ "tabs.js" ],
     "alias": {
       "$": "$",
-      "util": "crossjs/util/0.0.1/util",
-      "class": "crossjs/class/0.0.3/class"
+      "class": "crossjs/class/0.0.5/class"
     }
   }
 }
