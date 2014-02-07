@@ -20,5 +20,6 @@
 
 ##history
 
+- 0.0.3 - add default `initialTab: 0`; add `zepto` supports
 - 0.0.2 - remove dependency `util`
 - 0.0.1 - init

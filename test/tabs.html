@@ -12,7 +12,7 @@
     <h2 id="qunit-userAgent"></h2>
     <ol id="qunit-tests"></ol>
     <div id="qunit-fixture">test markup</div>
-    <script src="../vendor/jquery/jquery.js"></script>
+    <script src="../vendor/zepto/zepto.js"></script>
     <script src="../vendor/seajs/sea.js"></script>
     <script src="../vendor/qunit/qunit.js"></script>
     <script>
@@ -20,11 +20,10 @@
         seajs.config({
             'base': '../sea-modules/',
             'map': [
-                ['/sea-modules/jquery', '/vendor/jquery/jquery']
+                ['/sea-modules/zepto', '/vendor/zepto/zepto']
             ],
             'alias': {
-              '$': 'jquery',
-              'util': 'crossjs/util/0.0.1/util',
+              '$': 'zepto',
               'class': 'crossjs/class/0.0.5/class'
             }
         });

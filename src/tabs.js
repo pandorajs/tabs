@@ -12,6 +12,8 @@ var $ = require('$'),
 var options = {
     tabs: '.ui-tab',
 
+    initialTab: 0,
+
     classes: {
       'paneLoading':      'ui-pane-loading',
       // 'tab':              'ui-tab',
@@ -59,7 +61,7 @@ var Tabs = new Class({
             return true;
           }
 
-          pane = $(n.hash, tab.parentsUntil('body'));
+          pane = $(n.hash, tab.parents('body'));
 
           if (pane.length === 0) {
             return true;

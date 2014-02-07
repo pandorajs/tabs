@@ -1,4 +1,4 @@
-define("crossjs/tabs/0.0.2/tabs-debug", [ "$-debug", "crossjs/class/0.0.5/class-debug", "crossjs/class/0.0.5/super-debug" ], function(require, exports, module) {
+define("crossjs/tabs/0.0.3/tabs-debug", [ "$-debug", "crossjs/class/0.0.5/class-debug", "crossjs/class/0.0.5/super-debug" ], function(require, exports, module) {
     /**
  * @module Tabs
  */
@@ -6,6 +6,7 @@ define("crossjs/tabs/0.0.2/tabs-debug", [ "$-debug", "crossjs/class/0.0.5/class-
     var $ = require("$-debug"), Class = require("crossjs/class/0.0.5/class-debug");
     var options = {
         tabs: ".ui-tab",
+        initialTab: 0,
         classes: {
             paneLoading: "ui-pane-loading",
             // 'tab':              'ui-tab',
@@ -38,7 +39,7 @@ define("crossjs/tabs/0.0.2/tabs-debug", [ "$-debug", "crossjs/class/0.0.5/class-
                 if (tab.length === 0) {
                     return true;
                 }
-                pane = $(n.hash, tab.parentsUntil("body"));
+                pane = $(n.hash, tab.parents("body"));
                 if (pane.length === 0) {
                     return true;
                 }

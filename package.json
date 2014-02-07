@@ -1,6 +1,6 @@
 {
   "name": "tabs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "tabs and accordion",
   "keywords": [ "tabs", "seajs", "modules" ],
   "homepage": "https://github.com/crossjs/tabs",
