@@ -1,9 +1,9 @@
-define("crossjs/tabs/0.0.3/tabs-debug", [ "$-debug", "crossjs/class/0.0.5/class-debug", "crossjs/class/0.0.5/super-debug" ], function(require, exports, module) {
+define("crossjs/tabs/0.1.0/tabs-debug", [ "$-debug", "crossjs/class/0.1.0/class-debug", "crossjs/class/0.1.0/super-debug" ], function(require, exports, module) {
     /**
  * @module Tabs
  */
     "use strict";
-    var $ = require("$-debug"), Class = require("crossjs/class/0.0.5/class-debug");
+    var $ = require("$-debug"), Class = require("crossjs/class/0.1.0/class-debug");
     var options = {
         tabs: ".ui-tab",
         initialTab: 0,
