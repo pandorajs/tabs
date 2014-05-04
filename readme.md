@@ -1,26 +1,27 @@
 #tabs
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/crossjs/tabs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-[![Build Status](https://api.travis-ci.org/crossjs/tabs.png?branch=master)](http://travis-ci.org/crossjs/tabs)
-[![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Build Status](https://api.travis-ci.org/pandorajs/tabs.png?branch=master)](http://travis-ci.org/pandorajs/tabs)
+[![Coverage Status](https://coveralls.io/repos/pandorajs/tabs/badge.png?branch=master)](https://coveralls.io/r/pandorajs/tabs?branch=master)
 
- > seajs module
+ > tabs, seajs module
 
-##how to require
-
-1. run `spm install crossjs/tabs`
-1. write `require('crossjs/tabs/VERSION.NUMBER/tabs')`
-
-##how to build
+##how to demo
 
 1. checkout
-1. `npm install --save-dev`
-1. `spm install --save`
-1. `grunt`
+1. run `npm install`
+1. run `spm install`
+1. run `grunt`
+1. view files in `/demo`
+
+##how to use
+
+1. run `spm install pandora/tabs`
+1. write `require('pandora/tabs/VERSION.NUMBER/tabs')`
+
+##find examples
+
+1. view the source files in '/src'
 
 ##history
 
-- 0.1.0 - upgrade `jQuery` to 2.1.0
-- 0.0.3 - add default `initialTab: 0`; add `zepto` supports
-- 0.0.2 - remove dependency `util`
-- 0.0.1 - init
+- 1.0.0 - release

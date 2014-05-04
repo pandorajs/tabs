@@ -1,26 +1,26 @@
 {
   "name": "tabs",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "tabs and accordion",
   "keywords": [ "tabs", "seajs", "modules" ],
-  "homepage": "https://github.com/crossjs/tabs",
+  "homepage": "https://github.com/pandorajs/tabs",
   "bugs": {
-    "url": "https://github.com/crossjs/tabs/issues"
+    "url": "https://github.com/pandorajs/tabs/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/crossjs/tabs/blob/master/LICENSE-MIT"
+      "url": "https://github.com/pandorajs/tabs/blob/master/LICENSE-MIT"
     }
   ],
   "author": {
-    "name": "crossjs",
-    "url": "https://github.com/crossjs"
+    "name": "pandorajs",
+    "url": "https://github.com/pandorajs"
   },
   "main": "Gruntfile.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/crossjs/tabs.git"
+    "url": "git://github.com/pandorajs/tabs.git"
   },
   "scripts": {
     "test": "grunt qunit"
@@ -32,22 +32,23 @@
   },
   "devDependencies": {
     "grunt": "*",
+    "grunt-cmd-transport": "*",
+    "grunt-cmd-concat": "*",
     "grunt-contrib-clean": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-jshint": "*",
-    "grunt-contrib-qunit": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-yuidoc": "*",
-    "grunt-cmd-transport": "*",
-    "grunt-cmd-concat": "*",
+    "grunt-coveralls": "*",
+    "grunt-qunit-istanbul": "*",
     "matchdep": "*"
   },
-  "family": "crossjs",
+  "family": "pandora",
   "spm": {
     "output": [ "tabs.js" ],
     "alias": {
       "$": "$",
-      "class": "crossjs/class/0.1.0/class"
+      "widget": "pandora/widget/1.0.0/widget"
     }
   }
 }

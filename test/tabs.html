@@ -6,28 +6,75 @@
 <link rel="stylesheet" href="../vendor/qunit/qunit.css">
 </head>
 <body>
-    <h1 id="qunit-header">QUnit Test Suite</h1>
-    <h2 id="qunit-banner"></h2>
-    <div id="qunit-testrunner-toolbar"></div>
-    <h2 id="qunit-userAgent"></h2>
-    <ol id="qunit-tests"></ol>
-    <div id="qunit-fixture">test markup</div>
-    <script src="../vendor/zepto/zepto.js"></script>
-    <script src="../vendor/seajs/sea.js"></script>
-    <script src="../vendor/qunit/qunit.js"></script>
-    <script>
-        QUnit.config.autostart = false;
-        seajs.config({
-            'base': '../sea-modules/',
-            'map': [
-                ['/sea-modules/zepto', '/vendor/zepto/zepto']
-            ],
-            'alias': {
-              '$': 'zepto',
-              'class': 'crossjs/class/0.1.0/class'
-            }
+  <h1 id="qunit-header">QUnit Test Suite</h1>
+  <h2 id="qunit-banner"></h2>
+  <div id="qunit-testrunner-toolbar"></div>
+  <h2 id="qunit-userAgent"></h2>
+  <ol id="qunit-tests"></ol>
+  <div id="qunit-fixture">test markup</div>
+  <script src="../vendor/jquery/jquery.js"></script>
+  <script src="../vendor/seajs/sea.js"></script>
+  <script src="../vendor/qunit/qunit.js"></script>
+  <script>
+    QUnit.config.autostart = false;
+
+    seajs.config({
+      'base': '../sea-modules/',
+      'map': [
+        ['/sea-modules/jquery', '/vendor/jquery/jquery']
+      ],
+      'alias': {
+        '$': 'jquery',
+        'widget': 'pandora/widget/1.0.0/widget'
+      }
+    });
+
+    seajs.use(['../src/tabs'], function (Tabs) {
+
+      QUnit.start();
+
+      test('tabs', function() {
+
+        $('<ul class="nav nav-tabs" data-role="tabs">' +
+            '<li><a href="#tab-pane-1" data-role="tab">1</a></li>' +
+            '<li><a href="#tab-pane-2" data-role="tab">2</a></li>' +
+            '<li><a href="#tab-pane-3" data-role="tab">3</a></li>' +
+          '</ul>' +
+          '<div class="tab-content">' +
+            '<div class="tab-pane fade" id="tab-pane-1">1</div>' +
+            '<div class="tab-pane fade" id="tab-pane-2">2</div>' +
+            '<div class="tab-pane fade" id="tab-pane-3">3</div>' +
+          '</div>').appendTo('#qunit-fixture');
+
+        $('<ul class="nav nav-tabs" data-role="tabs">' +
+            '<li><a href="#tab-pane-n1" data-role="tab">n1</a></li>' +
+            '<li><a href="#tab-pane-n2" data-role="tab">n2</a></li>' +
+            '<li><a href="#tab-pane-n3" data-role="tab">n3</a></li>' +
+          '</ul>' +
+          '<div class="tab-content">' +
+            '<div class="tab-pane fade" id="tab-pane-n1">n1</div>' +
+            '<div class="tab-pane fade" id="tab-pane-n2">n2</div>' +
+            '<div class="tab-pane fade" id="tab-pane-n3" data-remote="remote.txt">n3</div>' +
+          '</div>').appendTo('#qunit-fixture');
+
+        var tabs = new Tabs({
+          initialTab: 1
         });
-        seajs.use(['./tabs.js']);
-    </script>
+
+        ok( $('#tab-pane-1').is(':hidden'), '' );
+        ok( $('#tab-pane-2').is(':visible'), '' );
+
+        ok( $('.nav-tabs [data-role=tab]:eq(1)').parent().hasClass('active in'), '' );
+
+        $('.nav-tabs [data-role=tab]:eq(0)').trigger('click');
+
+        ok( $('#tab-pane-1').is(':visible'), '' );
+        ok( $('#tab-pane-2').is(':hidden'), '' );
+
+        ok( !$('.nav-tabs [data-role=tab]:eq(1)').hasClass('active in'), '' );
+
+      });
+    });
+  </script>
 </body>
 </html>

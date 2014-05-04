@@ -1,3 +1,0 @@
-[submodule "vendor/yuidoc-bootstrap"]
-	path = vendor/yuidoc-bootstrap
-	url = https://github.com/crossjs/yuidoc-bootstrap.git

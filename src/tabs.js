@@ -7,192 +7,57 @@ define(function (require, exports, module) {
 'use strict';
 
 var $ = require('$'),
-  Class = require('class');
-
-var options = {
-    tabs: '.ui-tab',
-
-    initialTab: 0,
-
-    classes: {
-      'paneLoading':      'ui-pane-loading',
-      // 'tab':              'ui-tab',
-      'tabActive':        'ui-tab-active'
-    }
-  };
+  Widget = require('widget');
 
   /**
    * 简单标签页类
    * @class Tabs
    * @constructor
    */
-var Tabs = new Class({
+var Tabs = Widget.extend({
 
-    /**
-     * 构造函数
-     * @method __construct
-     */
-    __construct: function () {
-
-      var self = this,
-
-        activeTab;
-
-      self.options = $.extend(true, {}, options, self.options);
-
-      self.parseArgs.apply(self, arguments);
-
-      if (!self.options.tabs) {
-        return;
-      }
-
-      // 事件订阅
-      if ($.isPlainObject(self.options.on)) {
-        self.on(self.options.on);
-      }
-
-      self.tabs = $(self.options.tabs)
-        .each(function (i, n) {
-
-          var tab = $(n),
-            pane;
-
-          if (tab.length === 0) {
-            return true;
-          }
-
-          pane = $(n.hash, tab.parents('body'));
-
-          if (pane.length === 0) {
-            return true;
-          }
-
-          pane.toggle(tab.hasClass(self.options.tabActive));
-
-          tab.on('click', function (e) {
-              e.preventDefault();
-              self.slide(i);
-            }).data('pane', pane);
-
-          if ((location.hash && n.hash === location.hash) ||
-              self.options.initialTab === i ||
-              self.options.initialTab === n.hash) {
-            activeTab = tab;
-          }
-
-        });
-
-      if (activeTab) {
-        activeTab.trigger('click');
-      }
-
+  defaults: {
+    activeClass: 'active in',
+    container: null,
+    // data: {},
+    delegates: {
+      'click [data-role=tab]': 'slide'
     },
+    element: '.nav-tabs',
+    initialTab: 0/*,
+    template: require('./tabs.handlebars')*/
+  },
 
-    /**
-     * 解析函数参数
-     * @method parseArgs
-     * @private
-     */
-    parseArgs: function () {
-      var args = Array.prototype.slice.call(arguments, 0),
-        arg0 = args.shift();
+  setup: function () {
+    this
+      .$('[data-role=tab]:eq(' + this.option('initialTab') + ')')
+      .trigger('click');
+  },
 
-      if ($.isPlainObject(arg0)) {
-        $.extend(true, this.options, arg0);
-      } else {
-        this.options.tabs = arg0;
-      }
+  slide: function (e) {
+    var ac = this.option('activeClass'),
+      tab = $(e.currentTarget),
+      pane = $(tab.prop('hash')),
+      remote = pane.data('remote');
 
-      if (args.length === 1 && typeof args[0] === 'function') {
-        this.options.effects.pane = args[0];
-      }
+    e.preventDefault();
 
-      return this;
-    },
+    tab.parent().addClass(ac)
+      .siblings((' ' + ac).replace(/\s+/g, '.')).removeClass(ac);
 
-    /**
-     * 滑动到指定标签与窗格
-     * @param {number} idx 标签索引
-     * @method slide
-     */
-    slide: function (idx) {
+    pane.show()
+      .siblings(':visible').hide();
 
-      var toOff,
-        toOn = this.tabs.eq(idx),
+    if (remote) {
+      pane.removeData('remote');
+      pane.load(remote);
+    }
 
-        url;
+    this.fire('tab', tab);
+  }
 
-      if (this.index !== undefined) {
-        toOff = this.tabs.eq(this.index);
-      } else {
-        toOff = this.tabs.filter('.' + this.options.classes.tabActive);
-      }
+});
 
-      // 先是tab
-      this.toggleTabs(toOff, toOn);
-
-      // 然后是pane
-      if (toOff) {
-        toOff = toOff.data('pane');
-      }
-
-      toOn = toOn.data('pane');
-
-      this.togglePanes(toOff, toOn);
-
-      // 最后是url
-      url = toOn.data('url');
-
-      if (url) {
-        this.getRemote(toOn, url);
-      }
-
-      this.index = idx;
-
-      this.fire('toggled', idx);
-
-    },
-
-    toggleTabs: function (toOff, toOn) {
-      var cls = this.options.classes;
-
-      toOff && toOff.removeClass(cls.tabActive);
-      toOn && toOn.addClass(cls.tabActive);
-    },
-
-    togglePanes: function (toOff, toOn) {
-      if (toOff) {
-        toOff.hide();
-      }
-      toOn.show();
-    },
-
-    getRemote: function (pane, url) {
-      var cls = this.options.classes;
-
-      if (cls.paneLoading) {
-        pane.addClass(cls.paneLoading);
-      }
-
-      $.get(url, function (res) {
-        if (cls.paneLoading) {
-          pane.removeClass(cls.paneLoading);
-        }
-        pane.html(res);
-        pane.data('url', null);
-      });
-    }/*,
-
-    getTab: function (idx) {
-      return this.elements.tabs[idx];
-    },
-
-    getPane: function (idx) {
-      return this.elements.panes[idx];
-    }*/
-
-  });
-
-return Tabs;
+module.exports = Tabs;
 
 });

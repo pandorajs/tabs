@@ -1,0 +1,12 @@
+<div class="nav nav-tabs" data-role="tabs">
+  {{#each tabs}}
+  <a href="{{hash}}" data-role="tab">{{name}}</a>
+  {{/each}}
+</div>
+{{!-- {{#if panes}} --}}
+<div class="tab-content" data-role="panes">
+  {{#each tabs}}
+  <div class="tab-pane fade" id="{{hash}}" data-url="{{url}}" data-role="pane"></div>
+  {{/each}}
+</div>
+{{!-- {{/if}} --}}

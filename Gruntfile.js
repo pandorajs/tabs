@@ -1,8 +1,8 @@
 /*
- * class
- * https://github.com/crossjs/class
+ * tabs
+ * https://github.com/pandorajs/tabs
  *
- * Copyright (c) 2014 crossjs
+ * Copyright (c) 2014 pandorajs
  * Licensed under the MIT license.
  */
 
@@ -17,6 +17,10 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
+    idleading: '<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>/',
+
+    sea: 'sea-modules/<%= idleading %>',
+
     jshint: {
       files: ['src/*.js'],
       options: {
@@ -25,7 +29,26 @@ module.exports = function(grunt) {
     },
 
     qunit: {
+      options: {
+        '--web-security': 'no',
+        coverage: {
+          baseUrl: './',
+          src: ['src/*.js'],
+          instrumentedFiles: 'temp/',
+          lcovReport: 'report/',
+          linesThresholdPct: 85
+        }
+      },
       all: ['test/*.html']
+    },
+
+    coveralls: {
+      options: {
+        force: true
+      },
+      all: {
+        src: 'report/*.info'
+      }
     },
 
     yuidoc: {
@@ -35,8 +58,7 @@ module.exports = function(grunt) {
         version: '<%= pkg.version %>',
         options: {
           paths: 'src',
-          outdir: 'doc',
-          themedir: 'vendor/yuidoc-bootstrap'
+          outdir: 'doc'
         }
       }
     },
@@ -44,7 +66,7 @@ module.exports = function(grunt) {
     clean: {
       pages: {
         files: {
-          src: ['gh-pages/**', '!.git/', '!.gitignore']
+          src: ['gh-pages/**/*', '!gh-pages/.git*']
         }
       },
       doc: {
@@ -54,26 +76,44 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          src: ['dist/**']
+          src: ['dist/**/*']
         }
       },
       build: {
         files: {
-          src: ['.build']
+          src: ['.build/**']
+        }
+      },
+      sea: {
+        files: {
+          src: ['<%= sea %>**']
         }
       }
     },
 
     copy: {
       doc: {
-        files: [ {expand: true, cwd: 'doc/', src: ['**'], dest: 'gh-pages/'} ]
+        files: [{
+          expand: true,
+          cwd: 'doc/',
+          src: ['**'],
+          dest: 'gh-pages/'
+        }]
+      },
+      sea: {
+        files: [{
+          expand: true,
+          cwd: 'dist/',
+          src: ['**'],
+          dest: '<%= sea %>'
+        }]
       }
     },
 
     transport: {
       options: {
         debug: true,
-        idleading: '<%= pkg.family %>/<%= pkg.name %>/<%= pkg.version %>/',
+        idleading: '<%= idleading %>',
         alias: '<%= pkg.spm.alias %>'
       },
       dist: {
@@ -81,8 +121,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'src/',
           src: ['*.js'],
-          dest: '.build/',
-          ext: '.js'
+          dest: '.build/'
         }]
       }
     },
@@ -90,16 +129,14 @@ module.exports = function(grunt) {
     concat: {
       options: {
         debug: true,
-        include: 'self',
-        paths: ['']
+        include: 'relative'
       },
       src: {
         files: [{
           expand: true,
           cwd: '.build/',
-          src: ['*.js'],
-          dest: 'dist/',
-          ext: '.js'
+          src: ['tabs*.js'],
+          dest: 'dist/'
         }]
       }
     },
@@ -123,8 +160,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: 'dist/',
           src: ['*.js', '!*-debug.js'],
-          dest: 'dist/',
-          ext: '.js'
+          dest: 'dist/'
         }]
       }
     }
@@ -133,10 +169,12 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['clean:dist', 'transport', 'concat', 'clean:build', 'uglify']);
 
-  grunt.registerTask('doc', ['yuidoc', 'clean:pages', 'copy', 'clean:doc']);
+  grunt.registerTask('demo', ['clean:sea', 'copy:sea']);
+
+  grunt.registerTask('doc', ['clean:doc', 'yuidoc', 'clean:pages', 'copy:doc']);
 
   grunt.registerTask('test', ['jshint', 'qunit']);
 
-  grunt.registerTask('default', ['test', 'doc', 'build']);
+  grunt.registerTask('default', ['test', 'doc', 'build', 'demo']);
 
 };
