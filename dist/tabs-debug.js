@@ -24,13 +24,16 @@ define("pandora/tabs/1.0.0/tabs-debug", [ "$-debug", "pandora/widget/1.0.0/widge
             this.$("[data-role=tab]:eq(" + this.option("initialTab") + ")").trigger("click");
         },
         slide: function(e) {
-            var ac = this.option("activeClass"), tab = $(e.currentTarget), pane = $(tab.prop("hash")), remote = pane.data("remote");
+            var ac = this.option("activeClass"), tab = $(e.currentTarget), pane = $(tab.prop("hash")), remote;
             e.preventDefault();
             tab.parent().addClass(ac).siblings((" " + ac).replace(/\s+/g, ".")).removeClass(ac);
-            pane.show().siblings(":visible").hide();
-            if (remote) {
-                pane.removeData("remote");
-                pane.load(remote);
+            if (pane.length) {
+                pane.show().siblings(":visible").hide();
+                remote = pane.data("remote");
+                if (remote) {
+                    pane.removeData("remote");
+                    pane.load(remote);
+                }
             }
             this.fire("tab", tab);
         }

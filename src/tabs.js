@@ -38,19 +38,24 @@ var Tabs = Widget.extend({
     var ac = this.option('activeClass'),
       tab = $(e.currentTarget),
       pane = $(tab.prop('hash')),
-      remote = pane.data('remote');
+      remote;
 
     e.preventDefault();
 
     tab.parent().addClass(ac)
       .siblings((' ' + ac).replace(/\s+/g, '.')).removeClass(ac);
 
-    pane.show()
-      .siblings(':visible').hide();
+    if (pane.length) {
 
-    if (remote) {
-      pane.removeData('remote');
-      pane.load(remote);
+      pane.show()
+        .siblings(':visible').hide();
+
+      remote = pane.data('remote');
+
+      if (remote) {
+        pane.removeData('remote');
+        pane.load(remote);
+      }
     }
 
     this.fire('tab', tab);
