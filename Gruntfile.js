@@ -123,6 +123,14 @@ module.exports = function(grunt) {
           src: ['*.js'],
           dest: '.build/'
         }]
+      },
+      handlebars: {
+        files: [{
+          expand: true,
+          cwd: 'src/',
+          src: ['*.handlebars'],
+          dest: '.build/'
+        }]
       }
     },
 
