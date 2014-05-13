@@ -85,6 +85,9 @@ var Tabs = Widget.extend({
       }
     }
 
+    this.activeTab = tab;
+    this.activePane = pane;
+
     this.fire('tab', tab, pane);
   }
 
