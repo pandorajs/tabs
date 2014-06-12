@@ -20,6 +20,7 @@ var $ = require('$'),
 var Tabs = Widget.extend({
 
   defaults: {
+    classPrefix: 'ue-tabs',
     container: null,
     // container: 'body',
     // data: {
@@ -32,6 +33,8 @@ var Tabs = Widget.extend({
     // element: '.nav-tabs',
     initialTab: 0,
     paneClass: 'active in',
+    // 阻止 location.hash 变化
+    preventDefault: true,
     tabClass: 'active',
     template: require('./tabs.handlebars')
   },
@@ -53,18 +56,30 @@ var Tabs = Widget.extend({
   },
 
   slide: function (e) {
-    var tabClass = this.option('tabClass'),
-      paneClass = this.option('paneClass'),
-      tab = $(e.currentTarget),
-      pane = this.role('pane').filter(tab.prop('hash')),
-      remote;
+    var self = this,
+      tabClass = self.option('tabClass'),
+      paneClass = self.option('paneClass'),
+      tab, pane, remote;
 
-    e.preventDefault();
+    if (typeof e === 'number') {
+      tab = self.role('tab').eq(e);
+    } else if (typeof e === 'string') {
+      tab = self.role('tab').filter(function () {
+        return this.hash === e;
+      });
+    } else {
+      tab = $(e.currentTarget);
+      if (self.option('preventDefault')) {
+        e.preventDefault();
+      }
+    }
 
     tab.parent()
       .addClass(tabClass)
       .siblings((' ' + tabClass).replace(/\s+/g, '.'))
       .removeClass(tabClass);
+
+    pane = self.role('pane').filter(tab.prop('hash'));
 
     if (pane.length === 0) {
       pane = $(tab.prop('hash'));
@@ -85,10 +100,10 @@ var Tabs = Widget.extend({
       }
     }
 
-    this.activeTab = tab;
-    this.activePane = pane;
+    self.activeTab = tab;
+    self.activePane = pane;
 
-    this.fire('tab', tab, pane);
+    self.fire('tab', tab, pane);
   }
 
 });
