@@ -114,7 +114,13 @@ module.exports = function(grunt) {
       options: {
         debug: true,
         idleading: '<%= idleading %>',
-        alias: '<%= pkg.spm.alias %>'
+        alias: '<%= pkg.spm.alias %>',
+        // for handlebars
+        handlebars: {
+          id: 'gallery/handlebars/1.3.0/handlebars-runtime',
+          knownHelpers: [],
+          knownHelpersOnly: false
+        }
       },
       dist: {
         files: [{

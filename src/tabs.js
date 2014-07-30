@@ -79,10 +79,10 @@ var Tabs = Widget.extend({
       .siblings((' ' + tabClass).replace(/\s+/g, '.'))
       .removeClass(tabClass);
 
-    pane = self.role('pane').filter(tab.prop('hash'));
+    pane = self.role('pane').filter('[id="' + tab.prop('hash').substring(1) + '"]');
 
     if (pane.length === 0) {
-      pane = $(tab.prop('hash'));
+      pane = $('[id="' + tab.prop('hash').substring(1) + '"]');
     }
 
     if (pane.length) {
