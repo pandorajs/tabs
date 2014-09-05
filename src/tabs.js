@@ -25,7 +25,7 @@ var Tabs = Widget.extend({
      * 主元素的className
      * @attribute classPrefix
      * @type {String}
-     * @default ue-tabs  
+     * @default ue-tabs
      */
     classPrefix: 'ue-tabs',
     container: null,
@@ -38,26 +38,26 @@ var Tabs = Widget.extend({
     },
 
     /**
-     * 把tabs渲染到选择器指定的DOM元素上 
-     * 
+     * 把tabs渲染到选择器指定的DOM元素上
+     *
      * @attribute element
      * @type {String}
-     * @default undefined  
+     * @default undefined
      */
     // element: '<div></div>',
     // element: '.nav-tabs',
     /**
      * 实例化后默认选中的标签索引，从0开始。
-     * 
-     * @attribute initialTab 
+     *
+     * @attribute initialTab
      * @type {Number}
-     * @default 0  
+     * @default 0
      */
     initialTab: 0,
 
     /**
      * 选中时，面板的className
-     * 
+     *
      * @attribute paneClass
      * @type {String}
      * @default active in
@@ -75,7 +75,7 @@ var Tabs = Widget.extend({
 
     /**
      * 选中时，tab的className
-     * 
+     *
      * @attribute tabClass
      * @type {String}
      * @default active
@@ -94,14 +94,15 @@ var Tabs = Widget.extend({
     this.render();
 
     if (initialTab !== -1) {
-      this.role('tab')
-        .eq(initialTab)
-        .trigger('click');
+      this.slide(initialTab);
+      // this.role('tab')
+      //   .eq(initialTab)
+      //   .trigger('click');
     }
   },
   /**
    * 设置指定的tab为选中状态
-   * 
+   *
    * @method slide
    * @param  {Number|String|Event} e  当e为Number时，e代表要选中的索引号，e为String时，则选中hash等于e的tab。
    * @example
@@ -111,8 +112,8 @@ var Tabs = Widget.extend({
    *   initialTab : 2
    * });
    * tabs.slide(1);
-   * tabs.slide('detail');
-   * 
+   * tabs.slide('#detail');
+   *
    * ```
    */
   slide: function (e) {
@@ -165,7 +166,7 @@ var Tabs = Widget.extend({
 
     /**
      * tab选中事件，当切换或选中tab时触发。
-     * 
+     *
      * @event tab
      * @param {object} e Event.
      * @param {jquery} tab 当前选中的tab标签

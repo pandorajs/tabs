@@ -114,27 +114,13 @@ module.exports = function(grunt) {
       options: {
         debug: true,
         idleading: '<%= idleading %>',
-        alias: '<%= pkg.spm.alias %>',
-        // for handlebars
-        handlebars: {
-          id: 'gallery/handlebars/1.3.0/handlebars-runtime',
-          knownHelpers: [],
-          knownHelpersOnly: false
-        }
+        alias: '<%= pkg.spm.alias %>'
       },
-      dist: {
+      src: {
         files: [{
           expand: true,
           cwd: 'src/',
-          src: ['*.js'],
-          dest: '.build/'
-        }]
-      },
-      handlebars: {
-        files: [{
-          expand: true,
-          cwd: 'src/',
-          src: ['*.handlebars'],
+          src: ['*.js', '*.handlebars', '*.css'],
           dest: '.build/'
         }]
       }
