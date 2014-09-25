@@ -3,8 +3,10 @@
   <li><a href="#{{id}}" data-role="tab">{{{name}}}</a></li>
   {{/each}}
 </ul>
+{{#if hasPanes}}
 <div class="tab-content" data-role="panes">
   {{#each tabs}}
   <div class="tab-pane fade" id="{{id}}" data-remote="{{url}}" data-role="pane">{{{content}}}</div>
   {{/each}}
 </div>
+{{/if}}
