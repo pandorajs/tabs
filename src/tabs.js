@@ -1,4 +1,3 @@
-define(function (require, exports, module) {
 
 /**
  * 标签页切换
@@ -8,8 +7,8 @@ define(function (require, exports, module) {
 
 'use strict';
 
-var $ = require('$'),
-  Widget = require('widget');
+var $ = require('jquery'),
+  Widget = require('pandora-widget');
 
 /**
  * 简单标签页切换，从页面已有DOM结构生成
@@ -178,5 +177,3 @@ var Tabs = Widget.extend({
 });
 
 module.exports = Tabs;
-
-});
