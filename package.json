@@ -76,6 +76,6 @@
   },
   "dependencies": {
     "jquery": "^1.11.1",
-    "pandora-widget": "^1.2.0"
+    "pandora-widget": "^1.2.2"
   }
 }
